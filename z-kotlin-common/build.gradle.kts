@@ -3,10 +3,16 @@ plugins {
   id("kotlin-platform-common")
 }
 
-
+//源码集
 sourceSets{
+  //main源码
   main{
+    //添加一个资源目录“zresDir”
     resources.srcDir("zresDir")
+  }
+  //test源码
+  test{
+  
   }
 }
 

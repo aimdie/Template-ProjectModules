@@ -55,14 +55,18 @@ kotlin {
         implementation(dep.Kotlin.Test.junit)
       }
     }
+    
     named("jvmMain"){
     
     }
+    
     named("jvmTest"){
     
     }
+    
     named("androidMain"){
     }
+    
     named("androidTest"){
     }
     //==================================================
