@@ -1,5 +1,5 @@
 plugins {
-  id(plugin.OrgJetbrainsCompose) version ver.Plugin.OrgJetbrainsCompose
+//  id(plugin.OrgJetbrainsCompose) version ver.Plugin.OrgJetbrainsCompose
   id("com.android.library")
   kotlin("android")
 }
@@ -8,12 +8,12 @@ dependencies {
 //  implementation(project(":common"))
   implementation(dep.Java.Junit)
   
-  implementation(dep.Android.AppCompat)
-  implementation(dep.Compose.Android.Activity)
-  implementation(dep.Compose.Android.ConstraintLayout)
-  
-  implementation(dep.Compose.Material)
-  implementation(dep.Compose.Ui)
+//  implementation(dep.Android.AppCompat)
+//  implementation(dep.Compose.Android.Activity)
+////  implementation(dep.Compose.Android.ConstraintLayout)
+//
+//  implementation(dep.Compose.Material)
+//  implementation(dep.Compose.Ui)
 }
 
 android {
