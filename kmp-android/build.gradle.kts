@@ -27,16 +27,16 @@ kotlin {
   sourceSets {
     named("commonMain") {
       dependencies {
-        implementation(dep.Kotlin.stdlib)
-        implementation(dep.Kotlinx.coroutinesCore)
-        implementation(dep.Kotlinx.serializationJson)
+        implementation(dep.Kotlin.Stdlib)
+        implementation(dep.Kotlinx.CoroutinesCore)
+        implementation(dep.Kotlinx.SerializationJson)
         
 //        implementation(project(":lib-common"))
       }
     }
     named("commonTest") {
       dependencies {
-        implementation(dep.Kotlin.Test.junit)
+        implementation(dep.Kotlin.Test.Junit)
       }
     }
     //==================================================

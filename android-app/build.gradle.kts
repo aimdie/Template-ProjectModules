@@ -13,7 +13,7 @@ repositories {
 
 dependencies {
 //  implementation(project(":common"))
-  implementation(dep.Java.junit)
+  implementation(dep.Java.Junit)
 
   implementation(dep.Android.AppCompat)
   implementation(dep.Compose.Android.Activity)
