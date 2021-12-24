@@ -1,4 +1,5 @@
 import type.kmp.configPublishPlan1
+import util.applySignParamPlan1
 
 buildscript {
   repositories {
@@ -11,6 +12,7 @@ buildscript {
     mavenLocal()
   }
   dependencies {
+    classpath("com.squareup.sqldelight:gradle-plugin:1.5.3")
     //解析json。
     classpath(kotlin("serialization", ver.Jetbrain.KotlinVersion))
     //kotlin的gradle插件。
@@ -29,6 +31,8 @@ allprojects {
     mavenLocal()
   }
 }
+
+//applySignParamPlan1()
 
 //配置子模块的发布信息。
 subprojects {
