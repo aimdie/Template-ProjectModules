@@ -26,10 +26,22 @@ android {
   compileSdkVersion = param.Android.compileSdkVersion
   buildToolsVersion = param.Android.buildToolsVersion
   defaultConfig {
+    ndk {
+      abiFilters.add("armeabi-v7a")
+      abiFilters.add("x86")
+    }
 //    applicationId = "cn.ace.android"
     
     minSdk = param.Android.minSdkVersion
     targetSdk = param.Android.targetSdkVersion
+  }
+  sourceSets {
+    getByName("main") {
+      jniLibs {
+        //对应项目目录的该目录，和main、test、androidTest。
+        srcDirs("src/testlibs")
+      }
+    }
   }
   buildFeatures {
     compose = true
