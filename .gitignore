@@ -1,0 +1,13 @@
+#忽略：“.”开头的文件
+.*
+#忽略：目录
+/build
+/captures
+#忽略：指定后缀文件
+*.iml
+*.log
+*.hprof
+#忽略：指定文件名
+local.properties
+#忽略：任何目录下的指定文件。
+*/build
