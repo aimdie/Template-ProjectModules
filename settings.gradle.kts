@@ -1,5 +1,5 @@
 println("settingsGradleKts:结束")
-rootProject.name = "Template-ProjectModules"
+//rootProject.name = "Template-ProjectModules"
 include(":z-kotlin-multiplatform")
 include(":z-kotlin-multiplatform-compose")
 include(":android-lib")

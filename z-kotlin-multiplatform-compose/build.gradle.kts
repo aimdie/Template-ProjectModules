@@ -53,7 +53,7 @@ kotlin {
     }
     named("commonTest") {
       dependencies {
-        implementation(dep.Kotlin.Test.junit)
+        implementation(test.Kotlin.test)
       }
     }
     named("androidMain"){

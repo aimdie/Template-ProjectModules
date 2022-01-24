@@ -68,7 +68,7 @@ android {
 }
 dependencies {
 //  implementation(project(":common"))
-  implementation(dep.Java.junit)
+  testImplementation(test.Kotlin.test)
   
   implementation(dep.Android.appCompat)
   implementation(dep.Android.activity)

@@ -20,7 +20,7 @@ kotlin{
     
     val commonTest by getting {
       dependencies {
-        implementation(dep.Kotlin.Test.junit)
+        implementation(test.Kotlin.test)
       }
     }
     val androidMain: KotlinSourceSet by getting {
