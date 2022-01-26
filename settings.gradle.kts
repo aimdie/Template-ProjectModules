@@ -6,7 +6,7 @@ include(":android-lib")
 include(":android-app")
 include(":kmp-android")
 
-//include(":z-kotlin-common")
+include(":z-kotlin-common")
 //include(":")
 
 

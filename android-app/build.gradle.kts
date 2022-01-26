@@ -78,4 +78,4 @@ dependencies {
   implementation(dep.Compose.ui)
 }
 
-setBuildDir(project.projectDir.parent + "/.${name}Build")
+setBuildDir(project.projectDir.parent + "/.builds/.${name}Build")

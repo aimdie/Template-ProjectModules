@@ -57,4 +57,4 @@ android {
   }
 }
 
-setBuildDir(project.projectDir.parent + "/.${name}Build")
+setBuildDir(project.projectDir.parent + "/.builds/.${name}Build")
