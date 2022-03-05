@@ -1,43 +1,39 @@
-import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
-
 plugins {
   pluginCompose()
-  pluginKotlinMultiplatform()
-  pluginKotlinAndroidExtension()
   pluginAndroidLibrary()
-}
-
-kotlin{
-  android()
-  sourceSets {
-    val commonMain by getting {
-      dependencies {
-        api(compose.runtime)
-        api(compose.foundation)
-        api(compose.material)
-      }
-    }
-    
-    val commonTest by getting {
-      dependencies {
-        implementation(test.Kotlin.test)
-      }
-    }
-    val androidMain: KotlinSourceSet by getting {
-      dependencies {
-      }
-    }
-  }
+//  pluginAndroidApplication()
+  /**
+   * 如果不加该插件：
+   * 1、可以生成APK。
+   * 2、会报错：native库缺失。
+   */
+  pluginKotlinAndroid()
 }
 
 android {
   compileSdkVersion = param.Android.compileSdkVersion
   buildToolsVersion = param.Android.buildToolsVersion
-  sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
   defaultConfig {
     minSdk = param.Android.minSdkVersion
     targetSdk = param.Android.targetSdkVersion
   }
+  
+  buildTypes {
+    release {
+      isMinifyEnabled = false
+//      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+      
+    }
+  }
+  compileOptions {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+  }
+  
+  buildFeatures {
+    compose = true
+  }
+  
   /**
    * 排除：不同模块、相同路径的文件。
    */
@@ -54,7 +50,22 @@ android {
     exclude("META-INF/LICENSE.md")
     exclude("META-INF/LICENSE-notice.md")
 //    exclude("")
+//    exclude("")
+//    exclude("")
+//    exclude("")
+//    exclude("")
   }
+}
+dependencies {
+//  implementation(project(":common"))
+  testImplementation(test.Kotlin.test)
+  
+  implementation(dep.Android.appCompat)
+  implementation(dep.Android.activityCompose)
+  implementation(dep.Android.constraintLayout)
+  
+  implementation(dep.Compose.material)
+  implementation(dep.Compose.ui)
 }
 
 setBuildDir(project.projectDir.parent + "/.builds/.${name}Build")

@@ -9,9 +9,6 @@ plugins {
   pluginKotlinAndroid()
 }
 
-group = "cn.ace"
-version = "29.8.13"
-
 android {
   compileSdkVersion = param.Android.compileSdkVersion
   buildToolsVersion = param.Android.buildToolsVersion
@@ -71,7 +68,7 @@ dependencies {
   testImplementation(test.Kotlin.test)
   
   implementation(dep.Android.appCompat)
-  implementation(dep.Android.activity)
+  implementation(dep.Android.activityCompose)
   implementation(dep.Android.constraintLayout)
   
   implementation(dep.Compose.material)

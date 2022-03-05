@@ -17,14 +17,13 @@ kotlin {
   android{
     //这两个都行。
     publishAllLibraryVariants()
-//    publishLibraryVariants("release", "debug")
   }
   /**
    * 方法：fun jvm(name: String = "jvm")
    * 1、参数是a，就是“aMain”和“aTest”目录。
    * 2、这里是：“desktopMain”和“desktopTest”目录。
    */
-  jvm("desktop") {
+  jvm {
     compilations.all {
       kotlinOptions.jvmTarget = "11"
     }
@@ -39,16 +38,9 @@ kotlin {
         implementation(dep.Kotlin.stdlib)
         implementation(dep.Kotlinx.coroutinesCore)
         implementation(dep.Kotlinx.serializationJson)
-  
-        api(compose.runtime)
-        api(compose.foundation)
-        api(compose.material)
-//        api("cn.ace:lib-common:+")
-//        api("cn.ace:lib-layout:+")
-//        api("cn.ace:lib-place:+")
-//        api("cn.ace:lib-color:+")
-//        api("cn.ace:lib-missing:+")
-//        implementation(project(":lib-"))
+        implementation(compose.runtime)
+        implementation(compose.foundation)
+        implementation(compose.material)
       }
     }
     named("commonTest") {
@@ -58,19 +50,19 @@ kotlin {
     }
     named("androidMain"){
       dependencies {
-        api("androidx.appcompat:appcompat:1.2.0")
-        api("androidx.core:core-ktx:1.3.1")
+        implementation(dep.Android.appCompat)
+        implementation(dep.Android.coreKtx)
       }
     }
     named("androidTest"){
       dependencies {
-        implementation("junit:junit:4.13")
+        implementation(dep.Java.junit)
       }
     }
-    named("desktopMain"){
+    named("jvmMain"){
     
     }
-    named("desktopTest"){
+    named("jvmTest"){
     
     }
     //==================================================
