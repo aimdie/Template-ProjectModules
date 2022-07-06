@@ -1,7 +1,6 @@
 plugins {
   kotlin("multiplatform")
   kotlin("plugin.serialization")
-  id("com.android.library")
   //kotlin-parcelize必须在com.android.library之后。
 //  id("kotlin-parcelize")
 }
@@ -30,12 +29,6 @@ kotlin {
     }
   }
   
-  android{
-    //这两个都行。
-    publishAllLibraryVariants()
-//    publishLibraryVariants("release", "debug")
-  }
-  
   /**
    * 给各个模块添加依赖。
    */
@@ -45,6 +38,8 @@ kotlin {
         implementation(dep.Kotlin.stdlib)
         implementation(dep.Kotlinx.coroutinesCore)
         implementation(dep.Kotlinx.serializationJson)
+  
+//        implementation(project(":lib-commonx"))
       }
     }
     
@@ -55,8 +50,6 @@ kotlin {
     }
     val jvmMain by getting{}
     val jvmTest by getting{}
-    val androidMain by getting{}
-    val androidTest by getting{}
     //==================================================
     /**
      * 等效于这些方法：
@@ -66,17 +59,6 @@ kotlin {
      */
   }
   
-}
-
-//////////////////////////////////////////////////
-
-android {
-  compileSdkVersion = param.Android.compileSdkVersion
-  sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
-  defaultConfig {
-    minSdk = param.Android.minSdkVersion
-    targetSdk =param.Android.targetSdkVersion
-  }
 }
 
 setBuildDir(project.projectDir.parent + "/.builds/.${name}Build")
