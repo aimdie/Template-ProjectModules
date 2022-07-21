@@ -11,12 +11,15 @@ kotlin {
       kotlinOptions {
         //开启"expect"关键字。
         freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
+        freeCompilerArgs +="-opt-in=kotlin.RequiresOptIn"
       }
     }
   }
-  android{
+  
+  android {
     //这两个都行。
     publishAllLibraryVariants()
+//    publishLibraryVariants("release", "debug")
   }
   /**
    * 方法：fun jvm(name: String = "jvm")
@@ -41,30 +44,40 @@ kotlin {
         implementation(compose.runtime)
         implementation(compose.foundation)
         implementation(compose.material)
+        
+        @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+        implementation(compose.material3)
+        
+//        api(project(":lib-commonx"))
+//        implementation(project(":lib-"))
       }
     }
-    named("commonTest") {
+    val commonTest by getting {
       dependencies {
         implementation(test.Kotlin.test)
       }
     }
-    named("androidMain"){
+    val jvmMain by getting {
+      dependencies {
+      }
+    }
+    val jvmTest by getting {
+      dependencies {
+      }
+    }
+    val androidMain by getting {
+//      dependsOn(jvmMain)
       dependencies {
         implementation(dep.Android.appCompat)
         implementation(dep.Android.coreKtx)
       }
     }
-    named("androidTest"){
+    val androidTest by getting {
       dependencies {
         implementation(dep.Java.junit)
       }
     }
-    named("jvmMain"){
     
-    }
-    named("jvmTest"){
-    
-    }
     //==================================================
     /**
      * named("androidMain") 等于 val androidMain by getting
@@ -72,6 +85,7 @@ kotlin {
   }
   
 }
+
 //////////////////////////////////////////////////
 
 android {
@@ -80,7 +94,7 @@ android {
   sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
   defaultConfig {
     minSdk = param.Android.minSdkVersion
-    targetSdk =param.Android.targetSdkVersion
+    targetSdk = param.Android.targetSdkVersion
   }
 }
 

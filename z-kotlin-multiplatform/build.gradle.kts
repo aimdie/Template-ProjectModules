@@ -1,39 +1,35 @@
 plugins {
-  kotlin("multiplatform")
-  kotlin("plugin.serialization")
-  id("com.android.library")
-  //kotlin-parcelize必须在com.android.library之后。
-//  id("kotlin-parcelize")
+  pluginCompose()
+  pluginKotlinMultiplatform()
+  pluginKotlinAndroidExtension()
+  pluginAndroidLibrary()
 }
 
 kotlin {
-  
   metadata {
     compilations.all {
       kotlinOptions {
         //开启"expect"关键字。
         freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
+        freeCompilerArgs +="-opt-in=kotlin.RequiresOptIn"
       }
     }
   }
   
-  /**
-   * 方法：fun jvm(name: String = "jvm")
-   * 1、他就是目录：jvmMain。
-   */
-  jvm {
-    compilations.all {
-      kotlinOptions.jvmTarget = "1.8"
-    }
-    testRuns["test"].executionTask.configure {
-      useJUnit()
-    }
-  }
-  
-  android{
+  android {
     //这两个都行。
     publishAllLibraryVariants()
 //    publishLibraryVariants("release", "debug")
+  }
+  /**
+   * 方法：fun jvm(name: String = "jvm")
+   * 1、参数是a，就是“aMain”和“aTest”目录。
+   * 2、这里是：“desktopMain”和“desktopTest”目录。
+   */
+  jvm {
+    compilations.all {
+      kotlinOptions.jvmTarget = "11"
+    }
   }
   
   /**
@@ -45,24 +41,40 @@ kotlin {
         implementation(dep.Kotlin.stdlib)
         implementation(dep.Kotlinx.coroutinesCore)
         implementation(dep.Kotlinx.serializationJson)
+        
+        api(project(":lib-commonx"))
+//        implementation(project(":lib-"))
       }
     }
-    
-    named("commonTest") {
+    val commonTest by getting {
       dependencies {
         implementation(test.Kotlin.test)
       }
     }
-    val jvmMain by getting{}
-    val jvmTest by getting{}
-    val androidMain by getting{}
-    val androidTest by getting{}
+    val jvmMain by getting {
+      dependencies {
+      }
+    }
+    val jvmTest by getting {
+      dependencies {
+      }
+    }
+    val androidMain by getting {
+//      dependsOn(jvmMain)
+      dependencies {
+        implementation(dep.Android.appCompat)
+        implementation(dep.Android.coreKtx)
+      }
+    }
+    val androidTest by getting {
+      dependencies {
+        implementation(dep.Java.junit)
+      }
+    }
+    
     //==================================================
     /**
-     * 等效于这些方法：
-     * val commonMain by getting
-     * val commonTest by getting
-     * val jvmMain by getting
+     * named("androidMain") 等于 val androidMain by getting
      */
   }
   
@@ -72,10 +84,11 @@ kotlin {
 
 android {
   compileSdkVersion = param.Android.compileSdkVersion
+  buildToolsVersion = param.Android.buildToolsVersion
   sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
   defaultConfig {
     minSdk = param.Android.minSdkVersion
-    targetSdk =param.Android.targetSdkVersion
+    targetSdk = param.Android.targetSdkVersion
   }
 }
 
