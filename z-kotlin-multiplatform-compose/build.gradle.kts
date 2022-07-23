@@ -74,7 +74,7 @@ kotlin {
     }
     val androidTest by getting {
       dependencies {
-        implementation(dep.Java.junit)
+        implementation(test.Java.junit)
       }
     }
     

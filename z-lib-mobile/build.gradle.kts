@@ -24,7 +24,7 @@ kotlin {
   /**
    * 方法：fun jvm(name: String = "jvm")
    * 1、参数是a，就是“aMain”和“aTest”目录。
-   * 2、这里是：“desktopMain”和“desktopTest”目录。
+   * 2、这里是：“jvmMain”和“jvmTest”目录。
    */
   jvm {
     compilations.all {
@@ -41,8 +41,17 @@ kotlin {
         implementation(dep.Kotlin.stdlib)
         implementation(dep.Kotlinx.coroutinesCore)
         implementation(dep.Kotlinx.serializationJson)
+  
+        implementation(compose.runtime)
+        implementation(compose.foundation)
+        implementation(compose.material)
+        @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+        implementation(compose.material3)
         
 //        api(project(":lib-commonx"))
+//        api(project(":lib-ui"))
+//        api(project(":lib-io"))
+//        api(project(":lib-jvm"))
 //        implementation(project(":lib-"))
       }
     }
@@ -51,31 +60,21 @@ kotlin {
         implementation(test.Kotlin.test)
       }
     }
-    val jvmMain by getting {
-      dependencies {
-      }
-    }
-    val jvmTest by getting {
-      dependencies {
-      }
-    }
     val androidMain by getting {
-//      dependsOn(jvmMain)
       dependencies {
         implementation(dep.Android.appCompat)
         implementation(dep.Android.coreKtx)
+
+//        api(project(":lib-android"))
       }
     }
     val androidTest by getting {
       dependencies {
         implementation(test.Java.junit)
+        implementation(test.Android.junitKtx)
       }
     }
     
-    //==================================================
-    /**
-     * named("androidMain") 等于 val androidMain by getting
-     */
   }
   
 }
